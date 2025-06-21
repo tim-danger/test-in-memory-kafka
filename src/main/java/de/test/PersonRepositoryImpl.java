@@ -4,6 +4,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaDelete;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @ApplicationScoped
@@ -31,5 +34,20 @@ public class PersonRepositoryImpl implements PersonRepository {
     public long numberOfAllEmployees() {
         Query query = entityManager.createQuery("SELECT COUNT(*) FROM Employee e");
         return (long) query.getSingleResult();
+    }
+
+    @Override
+    public void deleteEntries() {
+        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+
+        // create delete
+        CriteriaDelete<Employee> delete = cb.
+                createCriteriaDelete(Employee.class);
+
+        // set the root class
+        Root e = delete.from(Employee.class);
+
+        // perform update
+        this.entityManager.createQuery(delete).executeUpdate();
     }
 }

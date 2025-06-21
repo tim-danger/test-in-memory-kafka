@@ -3,6 +3,7 @@ package de.test;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.eclipse.microprofile.reactive.messaging.Outgoing;
 
 @ApplicationScoped
 public class MyMessagingApplication {
@@ -10,9 +11,7 @@ public class MyMessagingApplication {
     @Inject
     PersonRepository repository;
 
-    /**
-     * Consume the uppercase channel (in-memory) and print the messages.
-     **/
+    @Outgoing("rest")
     @Incoming("test")
     public void sink(EmployeeDto word) {
         this.repository.savePerson(word);

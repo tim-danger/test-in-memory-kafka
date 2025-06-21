@@ -8,8 +8,29 @@ quarkus:
     jdbc:
       #      driver: org.h2.Driver
       #      url: jdbc:h2:mem:default
-      url: jdbc:h2:file:/home/tim/Dokumente/Projekte/test-in-memory-kafka/db
+      url: jdbc:h2:file:/home/tim/Dokumente/Projekte/test-in-memory-kafka/db;DB_CLOSE_ON_EXIT=FALSE
   liquibase:
     migrate-at-start: true
     clean-at-start: true
     change-log: db/yaml/changeLog.yaml
+mp:
+  messaging:
+    incoming:
+      test:
+        auto:
+          offset:
+            reset: "earliest"
+        connector: smallrye-kafka
+        failure-strategy: fail
+        bootstrap:
+          servers: localhost:9093
+    outgoing:
+      rest:
+        auto:
+          offset:
+            reset: "earliest"
+        connector: smallrye-kafka
+        merge: true
+        failure-strategy: fail
+        bootstrap:
+          servers: localhost:9093

@@ -9,7 +9,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: int
+                  type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
@@ -61,12 +61,12 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: salary
-                  type: decimal
+                  type: float(53)
                   constraints:
                     nullable: false
               - column:
                   name: bonus
-                  type: decimal
+                  type: float(53)
                   constraints:
                     nullable: false
               - column:

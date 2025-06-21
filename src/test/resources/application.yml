@@ -21,3 +21,11 @@ mp:
             reset: "earliest"
         connector: smallrye-in-memory
         failure-strategy: fail
+    outgoing:
+      rest:
+        auto:
+          offset:
+            reset: "earliest"
+        connector: smallrye-in-memory
+        merge: true
+        failure-strategy: fail
