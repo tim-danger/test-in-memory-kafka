@@ -1,0 +1,23 @@
+quarkus:
+  http:
+    test-port: 8083
+  datasource:
+    username: tim
+    password: pass
+    db-kind: h2
+    jdbc:
+#      driver: org.h2.Driver
+#      url: jdbc:h2:mem:default
+      url: jdbc:h2:file:/home/tim/Dokumente/Projekte/test-in-memory-kafka/db
+  liquibase:
+    migrate-at-start: true
+    change-log: db/yaml/changeLog.yaml
+mp:
+  messaging:
+    incoming:
+      test:
+        auto:
+          offset:
+            reset: "earliest"
+        connector: smallrye-in-memory
+        failure-strategy: fail
