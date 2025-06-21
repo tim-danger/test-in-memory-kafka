@@ -1,6 +1,8 @@
 quarkus:
   http:
     test-port: 8083
+  devservices:
+    enabled: false
   datasource:
     username: tim
     password: pass

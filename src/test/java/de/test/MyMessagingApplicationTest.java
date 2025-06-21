@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
 @QuarkusTest
-@QuarkusTestResource(KafkaTestResourceLifecycleManager.class)
+@QuarkusTestResource(value = KafkaTestResourceLifecycleManager.class, restrictToAnnotatedClass = true)
 public class MyMessagingApplicationTest {
 
     @Inject
